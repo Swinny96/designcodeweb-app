@@ -93,6 +93,6 @@ const IconWrapper = styled.div`
     position: relative;
 
     ${Wrapper}:hover & {
-      filter: hue-rotate(10deg) brightness(100%) saturate(120);
+      filter: hue-rotate(10deg) brightness(100%) saturate(120%);
     }
 `
