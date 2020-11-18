@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import MockupAnimation from "../animations/mockupanimation"
+import WaveBackground from "../backgrounds/wavebackground"
 import PurchaseButton from "../buttons/PurchaseButton"
 import { themes } from "../styles/ColorStyles"
 import { H1, MediumText } from "../styles/TextStyles"
@@ -8,6 +9,7 @@ import { H1, MediumText } from "../styles/TextStyles"
 function HeroSection() {
   return (
     <Wrapper>
+      <WaveBackground />
       <ContentWrapper>
         <TextWrapper>
             <Title>Design 
@@ -30,7 +32,7 @@ function HeroSection() {
 export default HeroSection
 
 const Wrapper = styled.div`
-    background: linear-gradient(180deg, #4316DB 0%, #9076E7 100%);
+    
     overflow: hidden;
 `
 
