@@ -1,39 +1,51 @@
 import { Link } from 'gatsby'
-import React from 'react'
-
-const menuData = [
-    { title: "Courses", 
-      icon: "/images/icons/courses.svg", 
-      link: "/courses" 
-    },
-    {
-      title: "Tutorials",
-      icon: "/images/icons/tutorials.svg",
-      link: "/tutorials",
-    },
-    { title: "Pricing", 
-      icon: "/images/icons/pricing.svg", 
-      link: "/pricing" 
-    },
-    { title: "Search", 
-      icon: "/images/icons/search.svg", 
-      link: "/search" 
-    },
-    { title: "Account", 
-      icon: "/images/icons/account.svg", 
-      link: "/account" 
-    },
-  ]
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { menuData } from '../../data/menuData'
+import MenuButton from '../buttons/MenuButton'
+import MenuToolTip from '../tooltips/MenuToolTip'
 
 export default function Header() {
+
+  const [isOpen, setIsOpen] = useState(false)
+
     return (
-        <>
-        {menuData.map((item, index) => (
-            <Link to={item.link} key={index}>
-            <img src={item.icon} alt={item.title} />
-            {item.title}
-            </Link>
-        ))}
-        </>
+        <Wrapper>
+          <Link to="/">
+            <img src="/images/logos/logo.svg" />
+          </Link>
+          <MenuWrapper count={menuData.length}>
+            {menuData.map((item, index) => 
+              item.link === "/account" ? (
+                <MenuButton 
+                item={item} 
+                key={index} 
+                onClick={() => setIsOpen(!isOpen)} 
+                />
+            ) : (
+              <MenuButton item={item} key={index} />
+          )
+          )}
+          </MenuWrapper>
+          <MenuToolTip isOpen={isOpen} />
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+  position: absolute;
+  top: 60px;
+  display: grid;
+  grid-template-columns: 44px auto;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 30px;
+  align-items: center;
+`
+
+const MenuWrapper = styled.div`
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(${props => props.count}, auto);
+
+`
