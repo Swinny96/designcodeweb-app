@@ -9,10 +9,16 @@ export default function Header() {
 
   const [isOpen, setIsOpen] = useState(false)
 
+  function handleClick(event){
+    setIsOpen(!isOpen)
+    event.preventDefault()
+    console.log(event)
+  }
+
     return (
         <Wrapper>
           <Link to="/">
-            <img src="/images/logos/logo.svg" />
+            <img src="/images/logos/logo.svg" alt="Logo" />
           </Link>
           <MenuWrapper count={menuData.length}>
             {menuData.map((item, index) => 
@@ -20,7 +26,7 @@ export default function Header() {
                 <MenuButton 
                 item={item} 
                 key={index} 
-                onClick={() => setIsOpen(!isOpen)} 
+                onClick={(event) => handleClick(event)} 
                 />
             ) : (
               <MenuButton item={item} key={index} />
