@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
-import MockupAnimation from "../animations/mockupanimation"
-import WaveBackground from "../backgrounds/wavebackground"
+import MockupAnimation from "../animations/MockupAnimation"
+import WaveBackground from "../backgrounds/WaveBackground"
 import PurchaseButton from "../buttons/PurchaseButton"
 import { themes } from "../styles/ColorStyles"
 import { H1, MediumText } from "../styles/TextStyles"
@@ -12,16 +12,18 @@ function HeroSection() {
       <WaveBackground />
       <ContentWrapper>
         <TextWrapper>
-            <Title>Design 
+          <Title>
+            Design
             <br /> and code <span> React </span> apps
-            </Title>
-            <Description>
-            Don’t skip design. Learn design and code, by building real apps with React and Swift. Complete courses about the best tools.
-            </Description>
-            <PurchaseButton
-                title="Start learning"
-                subtitle="120+ hours of video"
-            />
+          </Title>
+          <Description>
+            Don’t skip design. Learn design and code, by building real apps with
+            React and Swift. Complete courses about the best tools.
+          </Description>
+          <PurchaseButton
+            title="Start learning"
+            subtitle="120+ hours of video"
+          />
         </TextWrapper>
         <MockupAnimation />
       </ContentWrapper>
@@ -32,19 +34,18 @@ function HeroSection() {
 export default HeroSection
 
 const animation = keyframes`
-  0% { opacity: 0; transform: transformY(-10px); filter: blur(10px); }
-  100% { opacity: 1;  transform: transformY(0px); filter: blur(0px); }
+  0% { opacity: 0; translateY(-10px); filter: blur(10px); }
+  100% { opacity: 1;  translateY(0px); filter: blur(0px); } 
 `
 
 const Wrapper = styled.div`
-    
-    overflow: hidden;
+  overflow: hidden;
 `
 
 const ContentWrapper = styled.div`
   max-width: 1234px;
   margin: 0 auto;
-	padding: 200px 30px;
+  padding: 200px 30px;
   display: grid;
   grid-template-columns: 360px auto;
 
@@ -54,7 +55,6 @@ const ContentWrapper = styled.div`
     padding: 150px 20px 250px;
   }
 `
-
 const TextWrapper = styled.div`
   max-width: 360px;
   display: grid;
@@ -62,15 +62,15 @@ const TextWrapper = styled.div`
 
   > * {
     opacity: 0;
-    animation: ${animation} 1s forwards;
+    animation: ${animation} 1s 0.2s forwards;
 
-    :nth-child(1){
+    :nth-child(1) {
       animation-delay: 0s;
     }
-    :nth-child(2){
+    :nth-child(2) {
       animation-delay: 0.2s;
     }
-    :nth-child(3){
+    :nth-child(3) {
       animation-delay: 0.4s;
     }
   }
@@ -85,15 +85,16 @@ const Title = styled(H1)`
 
   span {
     background: linear-gradient(180deg, #ffd7ff 0%, #ffb6ff 100%);
-    -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    color: transparent;
   }
-
   @media (max-width: 450px) {
     font-size: 48px;
   }
 `
 
-const Description = styled(MediumText) `
+const Description = styled(MediumText)`
+  font-size: 17px;
+  line-height: 130%;
 `

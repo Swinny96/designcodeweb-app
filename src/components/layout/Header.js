@@ -1,17 +1,16 @@
-import { Link } from 'gatsby'
-import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
-import { menuData } from '../../data/menuData'
-import MenuButton from '../buttons/MenuButton'
-import MenuToolTip from '../tooltips/MenuToolTip'
+import { Link } from "gatsby"
+import React, { useEffect, useRef, useState } from "react"
+import styled from "styled-components"
+import { menuData } from "../../data/menuData"
+import MenuButton from "../buttons/MenuButton"
+import MenuToolTip from "../tooltips/MenuToolTip"
 
 export default function Header() {
-
   const [isOpen, setIsOpen] = useState(false)
   const ref = useRef()
   const tooltipRef = useRef()
 
-  function handleClick(event){
+  function handleClick(event) {
     setIsOpen(!isOpen)
     event.preventDefault()
     /* console.log(event) */
@@ -19,51 +18,52 @@ export default function Header() {
 
   function handleClickOutside(event) {
     if (
-      ref.current && 
-      !ref.current.contains(event.target) && 
+      ref.current &&
+      !ref.current.contains(event.target) &&
       !tooltipRef.current.contains(event.target)
-      ) {
+    ) {
+      console.log("Document is clicked")
       setIsOpen(false)
-      }
+    }
   }
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside)
 
-    return() => {
+    return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
+  }, [])
 
-  },[])
-
-    return (
-        <Wrapper>
-          <Link to="/">
-            <img src="/images/logos/logo.svg" alt="Logo" />
-          </Link>
-          <MenuWrapper count={menuData.length} ref={ref}>
-            {menuData.map((item, index) => 
-              item.link === "/account" ? (
-                <MenuButton 
-                item={item} 
-                key={index} 
-                onClick={event => handleClick(event)} 
-                />
-            ) : (
-              <MenuButton item={item} key={index} />
+  return (
+    <Wrapper>
+      <Link to="/">
+        <img src="/images/logos/logo.svg" alt="Logo" />
+      </Link>
+      <MenuWrapper count={menuData.length} ref={ref}>
+        {menuData.map((item, index) =>
+          item.link === "/account" ? (
+            <MenuButton
+              item={item}
+              key={index}
+              onClick={event => handleClick(event)}
+            />
+          ) : (
+            <MenuButton item={item} key={index} />
           )
-          )}
-            <HamburgerWrapper>
-              <MenuButton item={{title: "", icon: "/images/icons/hamburger.svg", link: "/" }}
-              onClick={event => handleClick(event)}  
-              />
-            </HamburgerWrapper>
-          </MenuWrapper>
-          <div ref={tooltipRef}>
-            <MenuToolTip isOpen={isOpen} />
-          </div>
-        </Wrapper>
-    )
+        )}
+        <HamburgerWrapper>
+          <MenuButton
+            item={{ title: "", icon: "/images/icons/hamburger.svg", link: "/" }}
+            onClick={event => handleClick(event)}
+          />
+        </HamburgerWrapper>
+      </MenuWrapper>
+      <div ref={tooltipRef}>
+        <MenuToolTip isOpen={isOpen} />
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div`
@@ -93,11 +93,10 @@ const MenuWrapper = styled.div`
 
   @media (max-width: 768px) {
     > a {
-    display: none;
+      display: none;
     }
     grid-template-columns: auto;
   }
-
 `
 const HamburgerWrapper = styled.div`
   display: none;
